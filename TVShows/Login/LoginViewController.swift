@@ -19,14 +19,13 @@ class LoginViewController: UIViewController {
     }
     var NumberOfTaps = 0
     @IBAction func Mybutton(_ sender: Any) {
-        
-    
-        
+
 //    print("Any string you like!")
         NumberOfTaps += 1
         printOnLabel.text = String(NumberOfTaps)
     }
     
-    @IBOutlet weak var btnClick: UIButton!
-    @IBOutlet weak var printOnLabel: UILabel!
+    @IBOutlet private weak var btnClick: UIButton!
+    @IBOutlet private weak var printOnLabel: UILabel!
+
 }
