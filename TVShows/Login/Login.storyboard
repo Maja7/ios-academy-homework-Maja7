@@ -19,13 +19,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5S-yn-d4f">
-                                <rect key="frame" x="105" y="329" width="204" height="0.0"/>
+                                <rect key="frame" x="207" y="448" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uaS-PY-VSg">
-                                <rect key="frame" x="97" y="384" width="220" height="129"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uaS-PY-VSg">
+                                <rect key="frame" x="112" y="532" width="191" height="72"/>
                                 <color key="backgroundColor" red="0.308002275384749" green="0.70527040155440412" blue="0.56019680236230429" alpha="0.68727992957746475" colorSpace="custom" customColorSpace="sRGB"/>
                                 <rect key="contentStretch" x="0.84999999999999998" y="0.14999999999999999" width="1" height="1"/>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="37"/>
@@ -41,18 +41,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.20221421632124348" green="0.20005494726772258" blue="0.19427936012656719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="uaS-PY-VSg" firstAttribute="centerY" secondItem="Vki-dX-nJf" secondAttribute="centerY" id="2lY-Wf-HA4"/>
-                            <constraint firstAttribute="trailing" secondItem="s5S-yn-d4f" secondAttribute="trailing" constant="105" id="DyW-7k-hwB"/>
-                            <constraint firstItem="s5S-yn-d4f" firstAttribute="leading" secondItem="Vki-dX-nJf" secondAttribute="leading" constant="105" id="FCE-C9-B5K"/>
-                            <constraint firstItem="s5S-yn-d4f" firstAttribute="top" secondItem="F6n-9G-tEo" secondAttribute="top" constant="285" id="PDf-kq-AMN"/>
-                            <constraint firstItem="uaS-PY-VSg" firstAttribute="centerX" secondItem="Vki-dX-nJf" secondAttribute="centerX" id="YXh-eq-nrn"/>
-                            <constraint firstItem="uaS-PY-VSg" firstAttribute="top" secondItem="s5S-yn-d4f" secondAttribute="bottom" constant="20" id="gBb-Gk-OBg"/>
+                            <constraint firstItem="F6n-9G-tEo" firstAttribute="trailing" secondItem="uaS-PY-VSg" secondAttribute="trailing" constant="111" id="Kt0-7w-JkK"/>
+                            <constraint firstItem="s5S-yn-d4f" firstAttribute="centerX" secondItem="Vki-dX-nJf" secondAttribute="centerX" id="U6z-KU-jTT"/>
+                            <constraint firstItem="F6n-9G-tEo" firstAttribute="bottom" secondItem="uaS-PY-VSg" secondAttribute="bottom" constant="258" id="dgB-zZ-VvC"/>
+                            <constraint firstItem="s5S-yn-d4f" firstAttribute="centerY" secondItem="Vki-dX-nJf" secondAttribute="centerY" id="fxW-54-vWJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="F6n-9G-tEo"/>
                     </view>
                     <connections>
-                        <outlet property="btnClick" destination="uaS-PY-VSg" id="r86-g4-dkZ"/>
-                        <outlet property="myCentarX" destination="2lY-Wf-HA4" id="cjo-dt-erV"/>
+                        <outlet property="increaseNumberOfTapsButton" destination="uaS-PY-VSg" id="Huw-Nq-Fgo"/>
                         <outlet property="printOnLabel" destination="s5S-yn-d4f" id="K8z-ub-Y2k"/>
                     </connections>
                 </viewController>

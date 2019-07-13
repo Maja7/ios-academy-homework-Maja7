@@ -8,26 +8,39 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        btnClick.layer.cornerRadius = 20
-        btnClick.clipsToBounds = true
-    }
-    var NumberOfTaps = 0
-    @IBAction func Mybutton(_ sender: Any) {
-
-//    print("Any string you like!")
-        NumberOfTaps += 1
-        printOnLabel.text = String(NumberOfTaps)
-    }
+     // MARK: - Outlets
     
-    @IBOutlet private weak var btnClick: UIButton!
+    @IBOutlet private weak var increaseNumberOfTapsButton: UIButton!
     @IBOutlet private weak var printOnLabel: UILabel!
 
-    @IBOutlet weak var myCentarX: NSLayoutConstraint!
+
+    // MARK: - Properties
+    
+    private var numberOfTaps: Int = 0
+    
+     // MARK: - Lifecycle methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureUI()
+        
+    }
+    
+     // MARK: - Actions
+    
+    @IBAction func Mybutton(_ sender: Any) {
+
+    //  print("Any string you like!")
+        numberOfTaps += 1
+        printOnLabel.text = String(numberOfTaps)
+    }
+    
+     // MARK: - Private functions
+    private func configureUI() {
+        increaseNumberOfTapsButton.layer.cornerRadius = 20
+        increaseNumberOfTapsButton.clipsToBounds = true
+    }
     
 }
