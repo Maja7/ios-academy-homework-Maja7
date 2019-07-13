@@ -3,26 +3,26 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4204B37822CE53DB0099BE9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4204B37722CE53DB0099BE9F /* AppDelegate.swift */; };
-		4204B37F22CE53DC0099BE9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4204B37E22CE53DC0099BE9F /* Assets.xcassets */; };
-		4204B38222CE53DC0099BE9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4204B38022CE53DC0099BE9F /* LaunchScreen.storyboard */; };
 		4264320322D3391500606E1A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264320222D3391500606E1A /* LoginViewController.swift */; };
 		4264320522D3395900606E1A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4264320422D3395900606E1A /* Login.storyboard */; };
+		42A7EA8D22DA873000026B62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4204B38022CE53DC0099BE9F /* LaunchScreen.storyboard */; };
+		42A7EA8E22DA888000026B62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42A7EA8B22DA79DB00026B62 /* Assets.xcassets */; };
 		7E542DA47362645D1F21C4DB /* Pods_TVShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADD24407011358E68CB55E5 /* Pods_TVShows.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4204B37422CE53DB0099BE9F /* TVShows.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVShows.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4204B37722CE53DB0099BE9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4204B37E22CE53DC0099BE9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4204B38122CE53DC0099BE9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4204B38322CE53DC0099BE9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4264320222D3391500606E1A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4264320422D3395900606E1A /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		42A7EA8B22DA79DB00026B62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB45D32DF9168C13896BB409 /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
 		CADD24407011358E68CB55E5 /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E824E9F7D3BE74ADD42A094B /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
@@ -46,14 +46,12 @@
 				BB45D32DF9168C13896BB409 /* Pods-TVShows.debug.xcconfig */,
 				E824E9F7D3BE74ADD42A094B /* Pods-TVShows.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		4204B36B22CE53DB0099BE9F = {
 			isa = PBXGroup;
 			children = (
-				4204B38922CF7EC60099BE9F /* Login */,
 				4204B37622CE53DB0099BE9F /* TVShows */,
 				4204B37522CE53DB0099BE9F /* Products */,
 				2A7F1A081263D921122E838B /* Pods */,
@@ -72,8 +70,9 @@
 		4204B37622CE53DB0099BE9F /* TVShows */ = {
 			isa = PBXGroup;
 			children = (
+				42A7EA8B22DA79DB00026B62 /* Assets.xcassets */,
+				4204B38922CF7EC60099BE9F /* Login */,
 				4204B37722CE53DB0099BE9F /* AppDelegate.swift */,
-				4204B37E22CE53DC0099BE9F /* Assets.xcassets */,
 				4204B38022CE53DC0099BE9F /* LaunchScreen.storyboard */,
 				4204B38322CE53DC0099BE9F /* Info.plist */,
 			);
@@ -157,9 +156,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4204B38222CE53DC0099BE9F /* LaunchScreen.storyboard in Resources */,
-				4204B37F22CE53DC0099BE9F /* Assets.xcassets in Resources */,
 				4264320522D3395900606E1A /* Login.storyboard in Resources */,
+				42A7EA8E22DA888000026B62 /* Assets.xcassets in Resources */,
+				42A7EA8D22DA873000026B62 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,7 +360,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.infinum.academy.mrukav.TVShows;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -379,7 +378,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.infinum.academy.mrukav.TVShows;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
