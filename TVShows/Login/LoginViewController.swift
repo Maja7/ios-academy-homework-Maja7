@@ -28,4 +28,6 @@ class LoginViewController: UIViewController {
     @IBOutlet private weak var btnClick: UIButton!
     @IBOutlet private weak var printOnLabel: UILabel!
 
+    @IBOutlet weak var myCentarX: NSLayoutConstraint!
+    
 }
