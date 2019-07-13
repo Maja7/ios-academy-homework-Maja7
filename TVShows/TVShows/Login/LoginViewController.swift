@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RevealingSplashView
 
 final class LoginViewController: UIViewController {
 
@@ -19,13 +20,14 @@ final class LoginViewController: UIViewController {
     // MARK: - Properties
     
     private var numberOfTaps: Int = 0
+    let revealingSplashView = RevealingSplashView.init(iconImage: UIImage(named: "splash-logo")!, iconInitialSize: CGSize(width: 129, height: 148), backgroundColor: .white)
     
      // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        animateSplashScreen()
         configureUI()
-        
     }
     
      // MARK: - Actions
@@ -41,6 +43,12 @@ final class LoginViewController: UIViewController {
     private func configureUI() {
         increaseNumberOfTapsButton.layer.cornerRadius = 20
         increaseNumberOfTapsButton.clipsToBounds = true
+    }
+    
+    private func animateSplashScreen(){
+        self.view.addSubview(revealingSplashView)
+        revealingSplashView.animationType = .twitter
+        revealingSplashView.startAnimation()
     }
     
 }
