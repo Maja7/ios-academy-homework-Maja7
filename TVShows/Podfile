@@ -8,5 +8,6 @@ target 'TVShows' do
   # Pods for TVShows
     pod 'MBProgressHUD'
     pod 'CodableAlamofire'
-  
+    pod 'RevealingSplashView'
+    pod 'LBTAComponents'
 end

@@ -2,23 +2,31 @@ PODS:
   - Alamofire (4.8.2)
   - CodableAlamofire (1.1.1):
     - Alamofire (~> 4.0)
+  - LBTAComponents (1.1)
   - MBProgressHUD (1.1.0)
+  - RevealingSplashView (0.6.0)
 
 DEPENDENCIES:
   - CodableAlamofire
+  - LBTAComponents
   - MBProgressHUD
+  - RevealingSplashView
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - CodableAlamofire
+    - LBTAComponents
     - MBProgressHUD
+    - RevealingSplashView
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   CodableAlamofire: b587c1198562824abb1f468aed34feb00d6cecd8
+  LBTAComponents: 2e7719683ddcf1cdf7280700438c0c6a5f7da550
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  RevealingSplashView: 40c5a770894459736acdc95655eeba0dd30ce91c
 
-PODFILE CHECKSUM: 295af82f06cfa5c88433f46107406be8131c6472
+PODFILE CHECKSUM: 6e72c63ea1beab314e31b3769f351a7a1da1182b
 
 COCOAPODS: 1.7.3
