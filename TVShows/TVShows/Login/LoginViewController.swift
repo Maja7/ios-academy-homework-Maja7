@@ -13,13 +13,16 @@ final class LoginViewController: UIViewController {
 
      // MARK: - Outlets
     
-    @IBOutlet private weak var increaseNumberOfTapsButton: UIButton!
-    @IBOutlet private weak var printOnLabel: UILabel!
+    @IBOutlet private weak var loginButton: UIButton!
+    
 
+    @IBOutlet private weak var rememberMeButton: UIButton!
+    
 
     // MARK: - Properties
     
     private var numberOfTaps: Int = 0
+    var rememberMe: Bool = false
     let revealingSplashView = RevealingSplashView.init(iconImage: UIImage(named: "splash-logo")!, iconInitialSize: CGSize(width: 129, height: 148), backgroundColor: .white)
     
      // MARK: - Lifecycle methods
@@ -32,17 +35,26 @@ final class LoginViewController: UIViewController {
     
      // MARK: - Actions
     
-    @IBAction func Mybutton(_ sender: Any) {
-
-    //  print("Any string you like!")
+    @IBAction func LoginButton(_ sender: Any) {
+        //  print("Any string you like!")
         numberOfTaps += 1
-        printOnLabel.text = String(numberOfTaps)
+        }
+    
+    @IBAction func rememberMeButton(_ sender: Any) {
+        if !rememberMe {
+             rememberMeButton.setImage(UIImage (named: "ic-checkbox-filled"), for: .normal)
+            rememberMe = true
+        }else{
+            rememberMeButton.setImage(UIImage (named: "ic-checkbox-empty"), for: .normal)
+            rememberMe = false
+        }
+       
     }
     
      // MARK: - Private functions
     private func configureUI() {
-        increaseNumberOfTapsButton.layer.cornerRadius = 20
-        increaseNumberOfTapsButton.clipsToBounds = true
+        loginButton.layer.cornerRadius = 20
+        loginButton.clipsToBounds = true
     }
     
     private func animateSplashScreen(){
