@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="arX-jg-17Y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TOZ-v2-5ot">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="PQE-i6-bft">
             <objects>
-                <viewController id="arX-jg-17Y" customClass="LoginViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="arX-jg-17Y" customClass="LoginViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vki-dX-nJf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -59,7 +59,7 @@
                                                 <rect key="frame" x="0.0" y="397" width="374" height="17"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWv-8l-gYc" userLabel="View_password">
                                                 <rect key="frame" x="0.0" y="419" width="374" height="1"/>
@@ -109,7 +109,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="LoginButton:" destination="arX-jg-17Y" eventType="touchUpInside" id="SLe-DC-5TY"/>
+                                                    <action selector="loginButton:" destination="arX-jg-17Y" eventType="touchUpInside" id="oNz-2p-wZp"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beR-qc-ZKX">
@@ -127,6 +127,9 @@
                                                 <state key="normal" title="Create an account">
                                                     <color key="titleColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="registerButton:" destination="arX-jg-17Y" eventType="touchUpInside" id="97z-CL-Ede"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -196,12 +199,33 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="F6n-9G-tEo"/>
                     </view>
+                    <navigationItem key="navigationItem" id="zEZ-Im-b7J"/>
                     <connections>
+                        <outlet property="emailField" destination="0CX-Pu-6Vv" id="0Me-16-ICi"/>
                         <outlet property="loginButton" destination="uaS-PY-VSg" id="xzH-xo-2fs"/>
+                        <outlet property="passwordField" destination="AYT-tH-bYM" id="OLA-DX-XAL"/>
                         <outlet property="rememberMeButton" destination="l3i-xc-WXh" id="DHO-sv-eVq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8Y-4X-RUp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="910.14492753623199" y="79.6875"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Xrf-qi-eoO">
+            <objects>
+                <navigationController storyboardIdentifier="Login" automaticallyAdjustsScrollViewInsets="NO" id="TOZ-v2-5ot" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MGz-R2-2r1">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="arX-jg-17Y" kind="relationship" relationship="rootViewController" id="YEj-eE-Ji1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MbJ-aQ-Cvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="79.6875"/>
         </scene>
