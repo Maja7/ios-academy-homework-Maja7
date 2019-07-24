@@ -49,7 +49,7 @@ final class LoginViewController: UIViewController {
     @IBAction func registerButton(_ sender: Any){
         getUserInputs()
         if(emailInput.isEmpty && passwordInput.isEmpty){
-            print("Email and password are empty!")
+            showAlert(failureError: "Email and password are empty!")
         }else{
             _alamofireCodableRegisterUserWith(email: emailInput, password: passwordInput)
             _loginUserWith(email: emailInput, password: passwordInput)
@@ -110,6 +110,19 @@ final class LoginViewController: UIViewController {
         navigationController?.pushViewController(homeViewController, animated: true)
     }
     
+    private func showAlert(failureError:String){
+        let alertController = UIAlertController(title: "Alert", message: failureError, preferredStyle: .alert)
+        
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            // ...
+        }
+        alertController.addAction(OKAction)
+        
+        self.present(alertController, animated: true) {
+            // ...
+        }
+    }
+    
 }
 
     // MARK: - Login + automatic JSON parsing
@@ -138,6 +151,7 @@ final class LoginViewController: UIViewController {
                         self.goToHomePage()
                     case .failure(let error):
                         print("API failure: \(error)")
+                        self.showAlert(failureError: "API failure: \(error)")
                         MBProgressHUD.hide(for: self.view, animated: true)
                     }
             }
@@ -167,11 +181,11 @@ private extension LoginViewController {
                 switch response.result {
                 case .success(let user):
                     print("Success: \(user)")
-                     self.currentUser = user
-                     MBProgressHUD.hide(for: self.view, animated: true)
+                    self.currentUser = user
+                    MBProgressHUD.hide(for: self.view, animated: true)
                 case .failure(let error):
                     print("API failure: \(error)")
-                     MBProgressHUD.hide(for: self.view, animated: true)
+                    MBProgressHUD.hide(for: self.view, animated: true)
                 }
         }
     }
