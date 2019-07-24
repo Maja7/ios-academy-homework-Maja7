@@ -37,13 +37,8 @@ final class LoginViewController: UIViewController {
         animateSplashScreen()
         configureUI()
     }
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? HomeViewController
-        {
-            vc.LoginUser = currentLoggedUser
-        }
-    }
+    
+    
     
      // MARK: - Actions
     
@@ -114,7 +109,8 @@ final class LoginViewController: UIViewController {
             withIdentifier: "HomeViewController"
         )
         
-        navigationController?.pushViewController(homeViewController, animated: true)
+        navigationController?.setViewControllers([homeViewController], animated: true)
+
     }
     
     private func showAlert(failureError:String){
@@ -127,6 +123,15 @@ final class LoginViewController: UIViewController {
         
         self.present(alertController, animated: true) {
             // ...
+        }
+    }
+    
+    // MARK: - Navigation
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? HomeViewController
+        {
+            vc.loggedUser = currentLoggedUser.token
         }
     }
     

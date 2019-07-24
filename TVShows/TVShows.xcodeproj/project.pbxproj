@@ -15,6 +15,8 @@
 		42D283CF22DE195A00499AB6 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42D283CE22DE195A00499AB6 /* Home.storyboard */; };
 		42D283D122DE198B00499AB6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D283D022DE198B00499AB6 /* HomeViewController.swift */; };
 		42D283D322DF508B00499AB6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D283D222DF508B00499AB6 /* User.swift */; };
+		42D283D522E8965700499AB6 /* TVShowsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D283D422E8965700499AB6 /* TVShowsTableViewCell.swift */; };
+		42D283D722E8A68C00499AB6 /* TVShowItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D283D622E8A68C00499AB6 /* TVShowItem.swift */; };
 		7E542DA47362645D1F21C4DB /* Pods_TVShows.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CADD24407011358E68CB55E5 /* Pods_TVShows.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +31,8 @@
 		42D283CE22DE195A00499AB6 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		42D283D022DE198B00499AB6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		42D283D222DF508B00499AB6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		42D283D422E8965700499AB6 /* TVShowsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowsTableViewCell.swift; sourceTree = "<group>"; };
+		42D283D622E8A68C00499AB6 /* TVShowItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShowItem.swift; sourceTree = "<group>"; };
 		BB45D32DF9168C13896BB409 /* Pods-TVShows.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.debug.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.debug.xcconfig"; sourceTree = "<group>"; };
 		CADD24407011358E68CB55E5 /* Pods_TVShows.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVShows.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E824E9F7D3BE74ADD42A094B /* Pods-TVShows.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVShows.release.xcconfig"; path = "Target Support Files/Pods-TVShows/Pods-TVShows.release.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 			children = (
 				42D283CE22DE195A00499AB6 /* Home.storyboard */,
 				42D283D022DE198B00499AB6 /* HomeViewController.swift */,
+				42D283D422E8965700499AB6 /* TVShowsTableViewCell.swift */,
+				42D283D622E8A68C00499AB6 /* TVShowItem.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -230,6 +236,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				42D283D322DF508B00499AB6 /* User.swift in Sources */,
+				42D283D722E8A68C00499AB6 /* TVShowItem.swift in Sources */,
+				42D283D522E8965700499AB6 /* TVShowsTableViewCell.swift in Sources */,
 				4264320322D3391500606E1A /* LoginViewController.swift in Sources */,
 				4204B37822CE53DB0099BE9F /* AppDelegate.swift in Sources */,
 				42D283D122DE198B00499AB6 /* HomeViewController.swift in Sources */,
