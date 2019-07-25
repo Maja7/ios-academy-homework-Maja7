@@ -74,6 +74,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3i-xc-WXh" customClass="MBProgressHUDRoundedButton">
                                                         <rect key="frame" x="0.0" y="0.0" width="24" height="29"/>
                                                         <state key="normal" image="ic-checkbox-empty"/>
+                                                        <state key="selected" image="ic-checkbox-filled"/>
                                                         <connections>
                                                             <action selector="rememberMeButton:" destination="arX-jg-17Y" eventType="touchUpInside" id="Hrh-aa-ePf"/>
                                                         </connections>
@@ -232,6 +233,7 @@
     </scenes>
     <resources>
         <image name="ic-checkbox-empty" width="24" height="24"/>
+        <image name="ic-checkbox-filled" width="24" height="24"/>
         <image name="login-logo" width="75" height="80"/>
     </resources>
 </document>
