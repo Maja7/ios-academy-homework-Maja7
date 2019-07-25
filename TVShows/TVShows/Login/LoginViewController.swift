@@ -47,10 +47,8 @@ final class LoginViewController: UIViewController {
                 return
         }
         _loginUserWith(email: emailField.text!, password: passwordField.text!)
-        
     }
        
-    
     @IBAction func registerButton(_ sender: Any){
         guard
             let username = emailField.text,
@@ -112,7 +110,6 @@ final class LoginViewController: UIViewController {
         self.present(alertController, animated: true) {
         }
     }
-    
 }
 
     // MARK: - Login + automatic JSON parsing
@@ -142,11 +139,11 @@ final class LoginViewController: UIViewController {
                         self.goToHomePage()
                     case .failure(let error):
                         print("API failure: \(error)")
+                        self!.showAlert(title: "API Failure", message:"API failure during login: \(error)")
                         MBProgressHUD.hide(for: self!.view, animated: true)
                     }
             }
         }
-    
 }
  
 // MARK: - Register + automatic JSON parsing
@@ -159,7 +156,6 @@ private extension LoginViewController {
             "email": email,
             "password": password
         ]
-        
         Alamofire
             .request(
                 "https://api.infinum.academy/api/users",
@@ -177,6 +173,7 @@ private extension LoginViewController {
                     self._loginUserWith(email: email, password: password)
                 case .failure(let error):
                     print("API failure: \(error)")
+                    self!.showAlert(title: "API Failure", message:"API failure during registration: \(error)")
                      MBProgressHUD.hide(for: self!.view, animated: true)
                 }
         }
