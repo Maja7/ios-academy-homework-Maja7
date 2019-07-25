@@ -22,15 +22,11 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var passwordField: UITextField!
     
     // MARK: - Properties
-
-    var rememberMe: Bool = false
-    var emailInput: String = ""
-    var passwordInput: String = ""
-    private var currentUser: User = User(email: "", type: "", id: "")
-    private var currentLoggedUser: LoginData = LoginData(token: "")
-    let revealingSplashView = RevealingSplashView.init(iconImage: UIImage(named: "splash-logo")!, iconInitialSize: CGSize(width: 129, height: 148), backgroundColor: .white)
+    private var currentUser: User?
+    private var currentLoggedUser: LoginData?
+    let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "splash-logo")!, iconInitialSize: CGSize(width: 129, height: 148), backgroundColor: .white)
     
-     // MARK: - Lifecycle methods
+    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,35 +34,40 @@ final class LoginViewController: UIViewController {
         configureUI()
     }
     
-    
-    
-     // MARK: - Actions
+    // MARK: - Actions
     
     @IBAction func loginButton(_ sender: Any) {
-        _loginUserWith(email: emailInput, password: passwordInput)
-        
+        guard
+            let username = emailField.text,
+            let password = passwordField.text,
+            !username.isEmpty,
+            !password.isEmpty
+            else {
+                showAlert(title: "Login error",  message: "Please enter username and password")
+                return
+        }
+        _loginUserWith(email: emailField.text!, password: passwordField.text!)
     }
-       
     
     @IBAction func registerButton(_ sender: Any){
-        getUserInputs()
-        if(emailInput.isEmpty && passwordInput.isEmpty){
-            showAlert(failureError: "Email and password are empty!")
-        }else{
-            _alamofireCodableRegisterUserWith(email: emailInput, password: passwordInput)
-            _loginUserWith(email: emailInput, password: passwordInput)
+        guard
+            let username = emailField.text,
+            let password = passwordField.text,
+            !username.isEmpty,
+            !password.isEmpty
+            else {
+                showAlert(title: "Registration error",  message: "Please enter username and password")
+                return
         }
+        _alamofireCodableRegisterUserWith(email: emailField.text!, password: passwordField.text!)
     }
     
     @IBAction func rememberMeButton(_ sender: Any) {
-        if !rememberMe {
+        if rememberMeButton.isSelected {
             saveFilledInputFields()
-            rememberMeButton.setImage(UIImage (named: "ic-checkbox-filled"), for: .normal)
-            rememberMe = true
+            rememberMeButton.isSelected.toggle()
         }else{
-            clearInputFields()
-            rememberMeButton.setImage(UIImage (named: "ic-checkbox-empty"), for: .normal)
-            rememberMe = false
+            rememberMeButton.isSelected.toggle()
         }
     }
     
@@ -82,18 +83,8 @@ final class LoginViewController: UIViewController {
         revealingSplashView.startAnimation()
     }
     
-    private func getUserInputs(){
-        emailInput = emailField.text!
-        passwordInput = passwordField.text!
-    }
-    
-    private func clearInputFields(){
-        emailField.text = ""
-        passwordField.text = ""
-    }
     private func saveFilledInputFields(){
-        emailField.text = currentUser.email
-        passwordField.text = passwordInput
+        emailField.text = currentUser?.email
     }
     
     private func showProgressHud(){
@@ -108,21 +99,15 @@ final class LoginViewController: UIViewController {
         let homeViewController = storyboard.instantiateViewController(
             withIdentifier: "HomeViewController"
         )
-        
         navigationController?.setViewControllers([homeViewController], animated: true)
-
     }
     
-    private func showAlert(failureError:String){
-        let alertController = UIAlertController(title: "Alert", message: failureError, preferredStyle: .alert)
-        
+    private func showAlert(title: String,  message: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            // ...
         }
         alertController.addAction(OKAction)
-        
         self.present(alertController, animated: true) {
-            // ...
         }
     }
     
@@ -131,46 +116,46 @@ final class LoginViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? HomeViewController
         {
-            vc.loggedUser = currentLoggedUser.token
+            vc.loggedUser = currentLoggedUser!.token
         }
     }
     
 }
 
-    // MARK: - Login + automatic JSON parsing
+// MARK: - Login + automatic JSON parsing
+
+private extension LoginViewController {
     
-    private extension LoginViewController {
-        
-        func _loginUserWith(email: String, password: String) {
-            showProgressHud()
-            let parameters: [String: String] = [
-                "email": email,
-                "password": password
-            ]
-            Alamofire
-                .request(
-                    "https://api.infinum.academy/api/users/sessions",
-                    method: .post,
-                    parameters: parameters,
-                    encoding: JSONEncoding.default)
-                .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<LoginData>) in
+    func _loginUserWith(email: String, password: String) {
+        showProgressHud()
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password
+        ]
+        Alamofire
+            .request(
+                "https://api.infinum.academy/api/users/sessions",
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default)
+            .validate()
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<LoginData>) in
                 switch response.result {
-                    case .success(let response):
-                        print( "Success: \(response)")
-                        self.currentLoggedUser = response
-                        MBProgressHUD.hide(for: self.view, animated: true)
-                        self.goToHomePage()
-                    case .failure(let error):
-                        print("API failure: \(error)")
-                        self.showAlert(failureError: "API failure: \(error)")
-                        MBProgressHUD.hide(for: self.view, animated: true)
-                    }
-            }
+                case .success(let response):
+                    //print( "Success: \(response)")
+                    guard let self = self else { return }
+                    self.currentLoggedUser = response
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self.goToHomePage()
+                case .failure(let error):
+                    print("API failure: \(error)")
+                    self!.showAlert(title: "API Failure", message:"API failure during login: \(error)")
+                    MBProgressHUD.hide(for: self!.view, animated: true)
+                }
         }
-    
+    }
 }
- 
+
 // MARK: - Register + automatic JSON parsing
 
 private extension LoginViewController {
@@ -181,7 +166,6 @@ private extension LoginViewController {
             "email": email,
             "password": password
         ]
-        
         Alamofire
             .request(
                 "https://api.infinum.academy/api/users",
@@ -189,15 +173,18 @@ private extension LoginViewController {
                 parameters: parameters,
                 encoding: JSONEncoding.default)
             .validate()
-            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { (response: DataResponse<User>) in
+            .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<User>) in
                 switch response.result {
                 case .success(let user):
-                    print("Success: \(user)")
+                    //print("Success: \(user)")
+                    guard let self = self else { return }
                     self.currentUser = user
                     MBProgressHUD.hide(for: self.view, animated: true)
+                    self._loginUserWith(email: email, password: password)
                 case .failure(let error):
                     print("API failure: \(error)")
-                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self!.showAlert(title: "API Failure", message:"API failure during registration: \(error)")
+                    MBProgressHUD.hide(for: self!.view, animated: true)
                 }
         }
     }
