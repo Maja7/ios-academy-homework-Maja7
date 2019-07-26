@@ -98,7 +98,9 @@ final class LoginViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Home", bundle: bundle)
         let homeViewController = storyboard.instantiateViewController(
             withIdentifier: "HomeViewController"
-        )
+            ) as! HomeViewController
+        
+        homeViewController.loggedUser = currentLoggedUser!.token
         navigationController?.setViewControllers([homeViewController], animated: true)
     }
     
@@ -108,14 +110,6 @@ final class LoginViewController: UIViewController {
         }
         alertController.addAction(OKAction)
         self.present(alertController, animated: true) {
-        }
-    }
-    
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? HomeViewController
-        {
-            vc.loggedUser = currentLoggedUser!.token
         }
     }
     

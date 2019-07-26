@@ -131,7 +131,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fiv-EL-J5n">
                                         <rect key="frame" x="0.0" y="459" width="414" height="25"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Epizodes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cb2-SB-Ahs">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episodes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cb2-SB-Ahs">
                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="5XJ-kW-3Iw"/>
@@ -167,7 +167,7 @@
                                             <constraint firstAttribute="height" constant="334" id="b3a-tB-Nbh"/>
                                         </constraints>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="EpizodeDetailsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EpizodeDetailsTableViewCell" id="hSS-V9-LNI" customClass="EpizodeDetailsTableViewCell" customModule="TVShows" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="EpisodeDetailsTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EpisodeDetailsTableViewCell" id="hSS-V9-LNI" customClass="EpisodeDetailsTableViewCell" customModule="TVShows" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hSS-V9-LNI" id="5XS-Zf-awG">
@@ -244,11 +244,31 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="addNewEpisode:" destination="bzR-mi-POh" eventType="touchUpInside" id="lRM-l3-ohi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C8W-Wk-PkE">
+                                <rect key="frame" x="20" y="64" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="1ah-f7-ALH"/>
+                                    <constraint firstAttribute="height" constant="40" id="M1p-7W-vjj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                <state key="normal" title="&lt;">
+                                    <color key="titleColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressBackButton:" destination="bzR-mi-POh" eventType="touchUpInside" id="JSX-RF-tNk"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="nRJ-3L-qWH" firstAttribute="bottom" secondItem="p0C-nE-pTY" secondAttribute="bottom" constant="30" id="0vb-et-sih"/>
+                            <constraint firstItem="C8W-Wk-PkE" firstAttribute="leading" secondItem="nRJ-3L-qWH" secondAttribute="leading" constant="20" id="OdM-1H-ZGg"/>
+                            <constraint firstItem="C8W-Wk-PkE" firstAttribute="top" secondItem="nRJ-3L-qWH" secondAttribute="top" constant="20" id="TGF-HR-6dn"/>
                             <constraint firstItem="nRJ-3L-qWH" firstAttribute="trailing" secondItem="9B2-bo-2Nm" secondAttribute="trailing" id="XKE-E7-dPm"/>
                             <constraint firstItem="9B2-bo-2Nm" firstAttribute="leading" secondItem="nRJ-3L-qWH" secondAttribute="leading" id="Ylf-EX-dQT"/>
                             <constraint firstItem="p0C-nE-pTY" firstAttribute="trailing" secondItem="nRJ-3L-qWH" secondAttribute="trailing" constant="-30" id="nrx-BM-kJe"/>
@@ -262,6 +282,7 @@
                         <outlet property="TVShowDescription" destination="sq0-gP-mNp" id="G6k-AK-08X"/>
                         <outlet property="TVShowName" destination="uyu-mc-WVA" id="5oz-Uc-eOw"/>
                         <outlet property="addEpisodeButton" destination="p0C-nE-pTY" id="B56-Da-YLc"/>
+                        <outlet property="backButton" destination="C8W-Wk-PkE" id="Sb3-fU-i3z"/>
                         <outlet property="episodeNumber" destination="2F4-pY-0j0" id="EBk-1S-93e"/>
                         <outlet property="tableView" destination="hsQ-Jr-uKl" id="VmE-cS-e1V"/>
                     </connections>
@@ -270,8 +291,142 @@
             </objects>
             <point key="canvasLocation" x="1643.4782608695652" y="75"/>
         </scene>
+        <!--Add episode-->
+        <scene sceneID="M1Q-fr-IIX">
+            <objects>
+                <viewController storyboardIdentifier="AddEpisodeViewController" title="Add episode" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fLh-uG-7Dh" customClass="AddEpisodeViewController" customModule="TVShows" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jkk-g9-0eh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rda-nR-OzP">
+                                <rect key="frame" x="20" y="64" width="374" height="778"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Px9-N0-rbP">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="7uX-p5-SZL"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SUf-ii-i00">
+                                        <rect key="frame" x="0.0" y="50" width="374" height="300"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="300" id="beF-z1-rPE"/>
+                                        </constraints>
+                                        <state key="normal" title="Upload photo"/>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wzt-LF-DJl">
+                                        <rect key="frame" x="0.0" y="350" width="374" height="324"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T3B-DW-29C">
+                                        <rect key="frame" x="0.0" y="674" width="374" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="ufm-zL-oos"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iuc-Ha-RAx">
+                                        <rect key="frame" x="0.0" y="699" width="374" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="IeM-2H-AGm"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Season n." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xNP-W8-fTp">
+                                        <rect key="frame" x="0.0" y="700" width="374" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="PT0-mF-OUQ"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qWc-ZO-Hij">
+                                        <rect key="frame" x="0.0" y="725" width="374" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="gK1-r7-57k"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode n." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="21J-4S-Fdr">
+                                        <rect key="frame" x="0.0" y="726" width="374" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="Gpq-Mq-cwl"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WxX-DG-ZIg">
+                                        <rect key="frame" x="0.0" y="751" width="374" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="OMk-dY-cOZ"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Episode description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iQz-3a-wC8">
+                                        <rect key="frame" x="0.0" y="752" width="374" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="A40-ry-5Wp"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IzW-mZ-PPi">
+                                        <rect key="frame" x="0.0" y="777" width="374" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="sWP-Xi-NW8"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Px9-N0-rbP" firstAttribute="top" secondItem="rda-nR-OzP" secondAttribute="top" id="AP6-tO-n5k"/>
+                                    <constraint firstAttribute="trailing" secondItem="T3B-DW-29C" secondAttribute="trailing" id="D6H-rv-9dK"/>
+                                    <constraint firstAttribute="trailing" secondItem="Px9-N0-rbP" secondAttribute="trailing" id="D8s-PM-iXH"/>
+                                    <constraint firstItem="T3B-DW-29C" firstAttribute="leading" secondItem="rda-nR-OzP" secondAttribute="leading" id="Kej-4i-65o"/>
+                                    <constraint firstAttribute="trailing" secondItem="Px9-N0-rbP" secondAttribute="trailing" id="Loo-cr-Z8w"/>
+                                    <constraint firstItem="Px9-N0-rbP" firstAttribute="leading" secondItem="rda-nR-OzP" secondAttribute="leading" id="MVt-lr-4V3"/>
+                                    <constraint firstItem="SUf-ii-i00" firstAttribute="top" secondItem="Px9-N0-rbP" secondAttribute="bottom" id="Oay-cq-A4m"/>
+                                    <constraint firstItem="Px9-N0-rbP" firstAttribute="top" secondItem="rda-nR-OzP" secondAttribute="top" id="cCq-w9-WHX"/>
+                                    <constraint firstItem="Px9-N0-rbP" firstAttribute="leading" secondItem="rda-nR-OzP" secondAttribute="leading" id="lx2-HC-URc"/>
+                                    <constraint firstItem="Wzt-LF-DJl" firstAttribute="leading" secondItem="rda-nR-OzP" secondAttribute="leading" id="mgk-SB-zc5"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wzt-LF-DJl" secondAttribute="trailing" id="o0A-n9-dEW"/>
+                                    <constraint firstAttribute="trailing" secondItem="SUf-ii-i00" secondAttribute="trailing" id="tf3-sS-cRE"/>
+                                    <constraint firstItem="SUf-ii-i00" firstAttribute="leading" secondItem="rda-nR-OzP" secondAttribute="leading" id="yex-Ns-VgP"/>
+                                    <constraint firstItem="Wzt-LF-DJl" firstAttribute="top" secondItem="SUf-ii-i00" secondAttribute="bottom" id="z9v-jh-L37"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rda-nR-OzP" firstAttribute="top" secondItem="Neo-Ij-HTo" secondAttribute="top" constant="20" id="CCB-Lb-9U7"/>
+                            <constraint firstItem="rda-nR-OzP" firstAttribute="leading" secondItem="Neo-Ij-HTo" secondAttribute="leading" constant="20" id="DKf-he-VMT"/>
+                            <constraint firstItem="Neo-Ij-HTo" firstAttribute="bottom" secondItem="rda-nR-OzP" secondAttribute="bottom" constant="20" id="iAa-9f-Oet"/>
+                            <constraint firstItem="Neo-Ij-HTo" firstAttribute="trailing" secondItem="rda-nR-OzP" secondAttribute="trailing" constant="20" id="iLb-IV-s7Q"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Neo-Ij-HTo"/>
+                    </view>
+                    <connections>
+                        <outlet property="episodeDescriptionField" destination="iQz-3a-wC8" id="vAe-Vr-ApU"/>
+                        <outlet property="episodeNumberField" destination="21J-4S-Fdr" id="TlR-yT-eyU"/>
+                        <outlet property="episodeTitleField" destination="T3B-DW-29C" id="oxH-6A-9AV"/>
+                        <outlet property="seasonNumberField" destination="xNP-W8-fTp" id="tZP-1G-fP9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pAp-KB-LY9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2676.811594202899" y="79.6875"/>
+        </scene>
     </scenes>
     <resources>
         <image name="image_placeholder_png" width="600" height="400"/>
     </resources>
+    <color key="tintColor" red="1" green="0.45882352939999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

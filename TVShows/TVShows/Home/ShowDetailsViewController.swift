@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import CodableAlamofire
 
-class ShowDetailsViewController: UIViewController {
+final class ShowDetailsViewController: UIViewController {
 
     // MARK: - Outlets
     
@@ -20,6 +20,7 @@ class ShowDetailsViewController: UIViewController {
     @IBOutlet weak var addEpisodeButton: UIButton!
     @IBOutlet weak var episodeNumber: UILabel!
     
+    @IBOutlet weak var backButton: UIButton!
     // MARK: - Properties
     
     var loggedUser = ""
@@ -36,11 +37,39 @@ class ShowDetailsViewController: UIViewController {
         _getShowDetails(token: loggedUser, idShow: showID)
     }
     
+    // MARK: - Actions
+    
+    @IBAction func addNewEpisode(_ sender: Any) {
+        let bundle = Bundle.main
+        let storyboard = UIStoryboard(name: "Home", bundle: bundle)
+        let vc = storyboard.instantiateViewController(
+            withIdentifier: "AddEpisodeViewController"
+            ) as! AddEpisodeViewController
+        
+        vc.showID = showID
+        vc.loggedUser = loggedUser
+        
+        let navigationController = UINavigationController(rootViewController: vc)
+        present(navigationController, animated: true)
+    }
+    
+    @IBAction func pressBackButton(_ sender: Any) {
+        _ = navigationController?.popViewController(animated: true)
+    }
     // MARK: - Private functions
     
     private func configureUI() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
         addEpisodeButton.layer.cornerRadius = 0.5 * addEpisodeButton.bounds.size.width
         addEpisodeButton.clipsToBounds = true
+        backButton.layer.cornerRadius = 0.5 * backButton.bounds.size.width
+        backButton.clipsToBounds = true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let addEpisodeVC = segue.destination as? AddEpisodeViewController {
+            addEpisodeVC.delegate = self
+        }
     }
     
 }
@@ -63,7 +92,7 @@ extension ShowDetailsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //print("CURRENT INDEX PATH BEING CONFIGURED: \(indexPath)")
-        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EpizodeDetailsTableViewCell.self), for: indexPath) as! EpizodeDetailsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EpisodeDetailsTableViewCell.self), for: indexPath) as! EpisodeDetailsTableViewCell
         cell.configure(with: items[indexPath.row])
         return cell
     }
@@ -133,4 +162,13 @@ private extension ShowDetailsViewController {
                 }
         }
     }
+}
+
+extension ShowDetailsViewController: AddEpisodeViewControllerDelegate {
+    func didAddNewEpisodes() {
+        print("TAP TAP TAP")
+        tableView.reloadData()
+    }
+    
+   
 }

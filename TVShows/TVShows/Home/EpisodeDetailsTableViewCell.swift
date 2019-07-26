@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EpizodeDetailsTableViewCell: UITableViewCell {
+final class EpisodeDetailsTableViewCell: UITableViewCell {
 
     // MARK: - Private UI
     
@@ -32,7 +32,7 @@ class EpizodeDetailsTableViewCell: UITableViewCell {
 }
 
 // MARK: - Configure
-extension EpizodeDetailsTableViewCell {
+extension EpisodeDetailsTableViewCell {
     func configure(with item: ShowEpisode) {
         title.text = item.title
         episodeNumber.text = "Ep" + item.episodeNumber
