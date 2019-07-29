@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import CodableAlamofire
+import Kingfisher
 
 final class ShowDetailsViewController: UIViewController {
 
@@ -19,9 +20,11 @@ final class ShowDetailsViewController: UIViewController {
     @IBOutlet weak var TVShowDescription: UILabel!
     @IBOutlet weak var addEpisodeButton: UIButton!
     @IBOutlet weak var episodeNumber: UILabel!
-    
+    @IBOutlet weak var showImage: UIImageView!
     @IBOutlet weak var backButton: UIButton!
     // MARK: - Properties
+    
+    
     
     var loggedUser = ""
     var showID = ""
@@ -64,6 +67,15 @@ final class ShowDetailsViewController: UIViewController {
         addEpisodeButton.clipsToBounds = true
         backButton.layer.cornerRadius = 0.5 * backButton.bounds.size.width
         backButton.clipsToBounds = true
+    }
+    
+    private func setImage(imageUrl: String){
+        let url = URL(string: "https://api.infinum.academy" + imageUrl)
+        if imageUrl.isEmpty {
+            showImage.image = UIImage(named: "icImagePlaceholder")
+        }else{
+           showImage.kf.setImage(with: url)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -127,6 +139,7 @@ private extension ShowDetailsViewController {
                     //print( "Success: \(response)")
                     guard let self = self else { return }
                     self.showDetails = response
+                    self.setImage(imageUrl: response.imageUrl)
                     self.TVShowName.text = response.title
                     self.TVShowDescription.text = response.description
                     self._getShowEpizodes(token: token, idShow: idShow)
@@ -166,7 +179,6 @@ private extension ShowDetailsViewController {
 
 extension ShowDetailsViewController: AddEpisodeViewControllerDelegate {
     func didAddNewEpisodes() {
-        print("TAP TAP TAP")
         tableView.reloadData()
     }
     

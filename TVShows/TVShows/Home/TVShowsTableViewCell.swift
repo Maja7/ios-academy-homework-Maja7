@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class TVShowsTableViewCell: UITableViewCell {
     
@@ -32,8 +33,13 @@ final class TVShowsTableViewCell: UITableViewCell {
 // MARK: - Configure
 extension TVShowsTableViewCell {
     func configure(with item: TVShowItem) {
-        // Here we are using conditional unwrap, meaning if we have the image, use that, if not, fallback to placeholder image.
-        //thumbnail.image = UIImage(named: item.imageUrl)
+        //thumbnail.image = UIImage(named: item.imageUrl) ?? UIImage(named: "icImagePlaceholder")
+        let url = URL(string: "https://api.infinum.academy" + item.imageUrl)
+        if item.imageUrl.isEmpty {
+            thumbnail.image = UIImage(named: "icImagePlaceholder")
+        }else{
+            thumbnail.kf.setImage(with: url)
+        }
         title.text = item.title
     }
 }

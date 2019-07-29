@@ -284,6 +284,7 @@
                         <outlet property="addEpisodeButton" destination="p0C-nE-pTY" id="B56-Da-YLc"/>
                         <outlet property="backButton" destination="C8W-Wk-PkE" id="Sb3-fU-i3z"/>
                         <outlet property="episodeNumber" destination="2F4-pY-0j0" id="EBk-1S-93e"/>
+                        <outlet property="showImage" destination="fvs-GH-BVo" id="gD5-xu-xbX"/>
                         <outlet property="tableView" destination="hsQ-Jr-uKl" id="VmE-cS-e1V"/>
                     </connections>
                 </viewController>
