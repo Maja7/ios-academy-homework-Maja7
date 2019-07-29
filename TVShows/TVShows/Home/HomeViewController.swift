@@ -26,8 +26,25 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic-logout"),
+        style: .plain,
+        target: self,
+        action: #selector(_logoutActionHandler)
+        )
         _getShows(token: loggedUser)
         setupTableView()
+    }
+    
+    @objc private func _logoutActionHandler() {
+        UserDefaults.standard.set(false, forKey: "RememberMeIsSelected")
+        UserDefaults.standard.removeObject(forKey: "Email")
+        UserDefaults.standard.removeObject(forKey: "Password")
+        let bundle = Bundle.main
+        let storyboard = UIStoryboard(name: "Login", bundle: bundle)
+        let loginViewController = storyboard.instantiateViewController(
+            withIdentifier: "LoginViewController"
+            ) as! LoginViewController
+        navigationController?.setViewControllers([loginViewController], animated: true)
     }
 }
 

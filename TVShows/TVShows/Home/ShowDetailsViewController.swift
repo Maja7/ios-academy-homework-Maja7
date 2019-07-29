@@ -22,9 +22,8 @@ final class ShowDetailsViewController: UIViewController {
     @IBOutlet weak var episodeNumber: UILabel!
     @IBOutlet weak var showImage: UIImageView!
     @IBOutlet weak var backButton: UIButton!
+    
     // MARK: - Properties
-    
-    
     
     var loggedUser = ""
     var showID = ""
@@ -59,6 +58,7 @@ final class ShowDetailsViewController: UIViewController {
     @IBAction func pressBackButton(_ sender: Any) {
         _ = navigationController?.popViewController(animated: true)
     }
+    
     // MARK: - Private functions
     
     private func configureUI() {

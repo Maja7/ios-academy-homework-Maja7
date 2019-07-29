@@ -32,6 +32,11 @@ final class LoginViewController: UIViewController {
         super.viewDidLoad()
         animateSplashScreen()
         configureUI()
+        if (isUserSelected()){
+            rememberMeButton.isSelected.toggle();
+            emailField.text = UserDefaults.standard.string(forKey: "Email")
+            passwordField.text = UserDefaults.standard.string(forKey: "Password")
+        }
     }
     
     // MARK: - Actions
@@ -46,7 +51,7 @@ final class LoginViewController: UIViewController {
                 showAlert(title: "Login error",  message: "Please enter username and password")
                 return
         }
-        _loginUserWith(email: emailField.text!, password: passwordField.text!)
+        (userHasStoredCredentials()) ? _loginUserWith(email: UserDefaults.standard.string(forKey: "Email")!, password: UserDefaults.standard.string(forKey: "Password")!) : _loginUserWith(email: emailField.text!, password: passwordField.text!)
     }
     
     @IBAction func registerButton(_ sender: Any){
@@ -64,9 +69,12 @@ final class LoginViewController: UIViewController {
     
     @IBAction func rememberMeButton(_ sender: Any) {
         if rememberMeButton.isSelected {
-            saveFilledInputFields()
+            clearInputFields()
             rememberMeButton.isSelected.toggle()
         }else{
+            UserDefaults.standard.set(true, forKey: "RememberMeIsSelected")
+            UserDefaults.standard.set(emailField.text, forKey: "Email")
+            UserDefaults.standard.set(passwordField.text, forKey: "Password")
             rememberMeButton.isSelected.toggle()
         }
     }
@@ -81,10 +89,6 @@ final class LoginViewController: UIViewController {
         self.view.addSubview(revealingSplashView)
         revealingSplashView.animationType = .twitter
         revealingSplashView.startAnimation()
-    }
-    
-    private func saveFilledInputFields(){
-        emailField.text = currentUser?.email
     }
     
     private func showProgressHud(){
@@ -113,6 +117,26 @@ final class LoginViewController: UIViewController {
         }
     }
     
+    private func userHasStoredCredentials() -> Bool{
+        guard
+            let emailCredentials = UserDefaults.standard.string(forKey: "Email"),
+            let passwordCredentials = UserDefaults.standard.string(forKey: "Password"),
+            !emailCredentials.isEmpty,
+            !passwordCredentials.isEmpty
+            else {
+                return false
+        }
+        return true
+    }
+    
+    private func isUserSelected() -> Bool{
+        if UserDefaults.standard.bool(forKey: "RememberMeIsSelected") { return true} else {return false}
+    }
+    
+    private func clearInputFields(){
+        emailField.text = ""
+        passwordField.text = ""
+    }
 }
 
 // MARK: - Login + automatic JSON parsing
