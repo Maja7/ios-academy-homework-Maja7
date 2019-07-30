@@ -10,7 +10,7 @@ import UIKit
 
 final class EpisodeDetailsTableViewCell: UITableViewCell {
 
-    // MARK: - Private UI
+    // MARK: - Outlets
     
     @IBOutlet weak var season: UILabel!
     @IBOutlet weak var episodeNumber: UILabel!
