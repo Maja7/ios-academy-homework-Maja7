@@ -10,6 +10,9 @@ import UIKit
 import Alamofire
 import CodableAlamofire
 
+struct Constants {
+    static let emailUserDefaults: String = "Email"
+}
 
 final class HomeViewController: UIViewController {
     
@@ -26,8 +29,29 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "ic-logout"),
+        style: .plain,
+        target: self,
+        action: #selector(_logoutActionHandler)
+        )
         _getShows(token: loggedUser)
         setupTableView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    @objc private func _logoutActionHandler() {
+        UserDefaults.standard.set(false, forKey: "RememberMeIsSelected")
+        UserDefaults.standard.removeObject(forKey: Constants.emailUserDefaults)
+        UserDefaults.standard.removeObject(forKey: "Password")
+        let bundle = Bundle.main
+        let storyboard = UIStoryboard(name: "Login", bundle: bundle)
+        let loginViewController = storyboard.instantiateViewController(
+            withIdentifier: "LoginViewController"
+            ) as! LoginViewController
+        navigationController?.setViewControllers([loginViewController], animated: true)
     }
 }
 
@@ -103,10 +127,10 @@ private extension HomeViewController {
                 headers: headers)
             .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[TVShowItem]>) in
+                guard let self = self else { return }
                 switch response.result {
                 case .success(let response):
                     print( "Success: \(response)")
-                    guard let self = self else { return }
                     self.items = response
                     self.tableView.reloadData()
                 case .failure(let error):

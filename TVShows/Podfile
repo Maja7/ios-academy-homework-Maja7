@@ -10,4 +10,5 @@ target 'TVShows' do
     pod 'CodableAlamofire'
     pod 'RevealingSplashView'
     pod 'LBTAComponents'
+    pod 'Kingfisher'
 end

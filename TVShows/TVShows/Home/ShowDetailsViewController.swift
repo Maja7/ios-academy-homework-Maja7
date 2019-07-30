@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import CodableAlamofire
+import Kingfisher
 
 final class ShowDetailsViewController: UIViewController {
 
@@ -19,8 +20,9 @@ final class ShowDetailsViewController: UIViewController {
     @IBOutlet weak var TVShowDescription: UILabel!
     @IBOutlet weak var addEpisodeButton: UIButton!
     @IBOutlet weak var episodeNumber: UILabel!
-    
+    @IBOutlet weak var showImage: UIImageView!
     @IBOutlet weak var backButton: UIButton!
+    
     // MARK: - Properties
     
     var loggedUser = ""
@@ -35,6 +37,11 @@ final class ShowDetailsViewController: UIViewController {
         configureUI()
         setupTableView()
         _getShowDetails(token: loggedUser, idShow: showID)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     // MARK: - Actions
@@ -56,14 +63,24 @@ final class ShowDetailsViewController: UIViewController {
     @IBAction func pressBackButton(_ sender: Any) {
         _ = navigationController?.popViewController(animated: true)
     }
+    
     // MARK: - Private functions
     
     private func configureUI() {
-        navigationController?.setNavigationBarHidden(true, animated: true)
         addEpisodeButton.layer.cornerRadius = 0.5 * addEpisodeButton.bounds.size.width
         addEpisodeButton.clipsToBounds = true
         backButton.layer.cornerRadius = 0.5 * backButton.bounds.size.width
         backButton.clipsToBounds = true
+        addEpisodeButton.pulsate()
+    }
+    
+    private func setImage(imageUrl: String){
+        let url = URL(string: "https://api.infinum.academy" + imageUrl)
+        if imageUrl.isEmpty {
+            showImage.image = UIImage(named: "icImagePlaceholder")
+        }else{
+           showImage.kf.setImage(with: url)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -127,6 +144,7 @@ private extension ShowDetailsViewController {
                     //print( "Success: \(response)")
                     guard let self = self else { return }
                     self.showDetails = response
+                    self.setImage(imageUrl: response.imageUrl)
                     self.TVShowName.text = response.title
                     self.TVShowDescription.text = response.description
                     self._getShowEpizodes(token: token, idShow: idShow)
@@ -166,9 +184,26 @@ private extension ShowDetailsViewController {
 
 extension ShowDetailsViewController: AddEpisodeViewControllerDelegate {
     func didAddNewEpisodes() {
-        print("TAP TAP TAP")
         tableView.reloadData()
     }
     
    
 }
+
+
+extension UIButton {
+    // Using CABasicAnimation
+    func pulsate() {
+        let pulse = CASpringAnimation(keyPath: "transform.scale")
+        pulse.duration = 0.4
+        pulse.fromValue = 0.95
+        pulse.toValue = 1.0
+        pulse.autoreverses = true
+        pulse.repeatCount = 10
+        pulse.initialVelocity = 0.5
+        pulse.damping = 1.0
+    
+        layer.add(pulse, forKey: "pulse")
+    }
+}
+

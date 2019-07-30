@@ -32,3 +32,5 @@ extension EpisodeDetailsTableViewCell {
         season.text = "S" + item.season
     }
 }
+
+
