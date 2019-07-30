@@ -67,6 +67,7 @@ final class ShowDetailsViewController: UIViewController {
         addEpisodeButton.clipsToBounds = true
         backButton.layer.cornerRadius = 0.5 * backButton.bounds.size.width
         backButton.clipsToBounds = true
+        addEpisodeButton.pulsate()
     }
     
     private func setImage(imageUrl: String){
@@ -184,3 +185,21 @@ extension ShowDetailsViewController: AddEpisodeViewControllerDelegate {
     
    
 }
+
+
+extension UIButton {
+    // Using CABasicAnimation
+    func pulsate() {
+        let pulse = CASpringAnimation(keyPath: "transform.scale")
+        pulse.duration = 0.4
+        pulse.fromValue = 0.95
+        pulse.toValue = 1.0
+        pulse.autoreverses = true
+        pulse.repeatCount = 10
+        pulse.initialVelocity = 0.5
+        pulse.damping = 1.0
+    
+        layer.add(pulse, forKey: "pulse")
+    }
+}
+

@@ -16,13 +16,6 @@ final class EpisodeDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var episodeNumber: UILabel!
     @IBOutlet weak var title: UILabel!
     
-    
-    // MARK: - Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         season.text = nil
@@ -40,3 +33,5 @@ extension EpisodeDetailsTableViewCell {
         season.text = "S" + item.season
     }
 }
+
+

@@ -48,6 +48,7 @@ final class LoginViewController: UIViewController {
             !username.isEmpty,
             !password.isEmpty
             else {
+                loginButton.shake(shakeCount: 5)
                 showAlert(title: "Login error",  message: "Please enter username and password")
                 return
         }
@@ -61,6 +62,8 @@ final class LoginViewController: UIViewController {
             !username.isEmpty,
             !password.isEmpty
             else {
+                emailField.shake()
+                passwordField.shake()
                 showAlert(title: "Registration error",  message: "Please enter username and password")
                 return
         }
@@ -83,6 +86,7 @@ final class LoginViewController: UIViewController {
     private func configureUI() {
         loginButton.layer.cornerRadius = 20
         loginButton.clipsToBounds = true
+        loginButton.flash()
     }
     
     private func animateSplashScreen(){
@@ -206,4 +210,41 @@ private extension LoginViewController {
         }
     }
     
+}
+
+extension UIView {
+    // Using SpringWithDamping
+    func shake(duration: TimeInterval = 0.5, xValue: CGFloat = 12, yValue: CGFloat = 0) {
+        self.transform = CGAffineTransform(translationX: xValue, y: yValue)
+        UIView.animate(withDuration: duration, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+            self.transform = CGAffineTransform.identity
+        }, completion: nil)
+        
+}
+
+    // Using CABasicAnimation
+    func shake(duration: TimeInterval = 0.05, shakeCount: Float = 6, xValue: CGFloat = 12, yValue: CGFloat = 0){
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = duration
+        animation.repeatCount = shakeCount
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - xValue, y: self.center.y - yValue))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + xValue, y: self.center.y - yValue))
+        self.layer.add(animation, forKey: "shake")
+    }
+    
+}
+
+extension UIButton {
+    // Using CABasicAnimation
+    func flash() {
+        let flash = CABasicAnimation(keyPath: "opacity")
+        flash.duration = 0.5
+        flash.fromValue = 1
+        flash.toValue = 0.1
+        flash.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        flash.autoreverses = true
+        flash.repeatCount = 2
+        layer.add(flash, forKey: nil)
+    }
 }
