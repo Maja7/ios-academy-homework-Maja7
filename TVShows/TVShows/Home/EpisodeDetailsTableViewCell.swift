@@ -22,7 +22,6 @@ final class EpisodeDetailsTableViewCell: UITableViewCell {
         episodeNumber.text = nil
         title.text = nil
     }
-    
 }
 
 // MARK: - Configure

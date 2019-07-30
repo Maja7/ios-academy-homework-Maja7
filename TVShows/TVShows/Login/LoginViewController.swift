@@ -54,7 +54,7 @@ final class LoginViewController: UIViewController {
         }
         (userHasStoredCredentials()) ? _loginUserWith(email: UserDefaults.standard.string(forKey: "Email")!, password: UserDefaults.standard.string(forKey: "Password")!) : _loginUserWith(email: emailField.text!, password: passwordField.text!)
     }
-  
+
     @IBAction func registerButton(_ sender: Any){
         guard
             let username = emailField.text,
@@ -101,16 +101,17 @@ final class LoginViewController: UIViewController {
         loadingNotification.label.text = "Loading"
     }
     
+    
     private func goToHomePage(){
         let bundle = Bundle.main
         let storyboard = UIStoryboard(name: "Home", bundle: bundle)
         let homeViewController = storyboard.instantiateViewController(
-            withIdentifier: "HomeViewController") as! HomeViewController
-        
+            withIdentifier: "HomeViewController"
+        ) as! HomeViewController
         homeViewController.loggedUser = currentLoggedUser!.token
         navigationController?.setViewControllers([homeViewController], animated: true)
     }
-    
+
     private func showAlert(title: String,  message: String){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
@@ -201,7 +202,7 @@ private extension LoginViewController {
                     self.currentUser = user
                     MBProgressHUD.hide(for: self.view, animated: true)
                     self._loginUserWith(email: email, password: password)
-                case .failure(let error):
+                 case .failure(let error):
                     print("API failure: \(error)")
                     self!.showAlert(title: "API Failure", message:"API failure during registration: \(error)")
                     MBProgressHUD.hide(for: self!.view, animated: true)

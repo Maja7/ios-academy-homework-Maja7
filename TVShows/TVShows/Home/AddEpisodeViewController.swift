@@ -24,6 +24,7 @@ final class AddEpisodeViewController: UIViewController {
     @IBOutlet weak var episodeDescriptionField: UITextField!
     
     // MARK: - Properties
+    
     weak var delegate: AddEpisodeViewControllerDelegate?
     var loggedUser = ""
     var showID = ""
