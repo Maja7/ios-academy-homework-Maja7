@@ -10,17 +10,11 @@ import UIKit
 
 final class EpisodeDetailsTableViewCell: UITableViewCell {
 
-    // MARK: - Private UI
+    // MARK: - Outlets
     
     @IBOutlet weak var season: UILabel!
     @IBOutlet weak var episodeNumber: UILabel!
     @IBOutlet weak var title: UILabel!
-    
-    // MARK: - Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -28,7 +22,6 @@ final class EpisodeDetailsTableViewCell: UITableViewCell {
         episodeNumber.text = nil
         title.text = nil
     }
-    
 }
 
 // MARK: - Configure

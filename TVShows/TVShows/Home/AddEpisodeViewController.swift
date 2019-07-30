@@ -14,7 +14,7 @@ protocol AddEpisodeViewControllerDelegate: class {
     func didAddNewEpisodes()
 }
 
-class AddEpisodeViewController: UIViewController {
+final class AddEpisodeViewController: UIViewController {
 
     // MARK: - Outlets
     
@@ -24,6 +24,7 @@ class AddEpisodeViewController: UIViewController {
     @IBOutlet weak var episodeDescriptionField: UITextField!
     
     // MARK: - Properties
+    
     weak var delegate: AddEpisodeViewControllerDelegate?
     var loggedUser = ""
     var showID = ""
@@ -60,7 +61,7 @@ class AddEpisodeViewController: UIViewController {
             else {
                 return
         }
-        _addNewEpisode(token: loggedUser, showId: showID, mediaId: "", title: episodeTitleField.text!, description: episodeDescriptionField.text!, episodeNumber: episodeNumberField.text!, seasonNumber: seasonNumberField.text!)
+        _addNewEpisode(token: loggedUser, showId: showID, mediaId: "", title: title, description: description, episodeNumber: episodeNumber, seasonNumber: seasonNumber)
     }
     
     @objc func didSelectCancel() {
@@ -108,9 +109,10 @@ private extension AddEpisodeViewController {
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) {[weak self] (response: DataResponse<NewEpisode>) in
                 switch response.result {
                 case .success(let episode):
+                    guard let self = self else { return }
                     print("Success: \(episode)")
-                    self!.delegate?.didAddNewEpisodes()
-                    self!.dismiss(animated: true, completion: nil)
+                    self.delegate?.didAddNewEpisodes()
+                    self.dismiss(animated: true, completion: nil)
                 case .failure(let error):
                     print("API failure: \(error)")
                     self!.showAlert(title: "API add episode failure", message: "\(error)")
