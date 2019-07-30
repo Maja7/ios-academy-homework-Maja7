@@ -39,6 +39,11 @@ final class ShowDetailsViewController: UIViewController {
         _getShowDetails(token: loggedUser, idShow: showID)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     // MARK: - Actions
     
     @IBAction func addNewEpisode(_ sender: Any) {
@@ -62,7 +67,6 @@ final class ShowDetailsViewController: UIViewController {
     // MARK: - Private functions
     
     private func configureUI() {
-        navigationController?.setNavigationBarHidden(true, animated: true)
         addEpisodeButton.layer.cornerRadius = 0.5 * addEpisodeButton.bounds.size.width
         addEpisodeButton.clipsToBounds = true
         backButton.layer.cornerRadius = 0.5 * backButton.bounds.size.width

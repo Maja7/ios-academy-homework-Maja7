@@ -10,6 +10,9 @@ import UIKit
 import Alamofire
 import CodableAlamofire
 
+struct Constants {
+    static let emailUserDefaults: String = "Email"
+}
 
 final class HomeViewController: UIViewController {
     
@@ -34,10 +37,14 @@ final class HomeViewController: UIViewController {
         _getShows(token: loggedUser)
         setupTableView()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     @objc private func _logoutActionHandler() {
         UserDefaults.standard.set(false, forKey: "RememberMeIsSelected")
-        UserDefaults.standard.removeObject(forKey: "Email")
+        UserDefaults.standard.removeObject(forKey: Constants.emailUserDefaults)
         UserDefaults.standard.removeObject(forKey: "Password")
         let bundle = Bundle.main
         let storyboard = UIStoryboard(name: "Login", bundle: bundle)
@@ -120,10 +127,10 @@ private extension HomeViewController {
                 headers: headers)
             .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<[TVShowItem]>) in
+                guard let self = self else { return }
                 switch response.result {
                 case .success(let response):
                     print( "Success: \(response)")
-                    guard let self = self else { return }
                     self.items = response
                     self.tableView.reloadData()
                 case .failure(let error):
