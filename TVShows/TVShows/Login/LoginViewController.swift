@@ -54,7 +54,7 @@ final class LoginViewController: UIViewController {
         }
         (userHasStoredCredentials()) ? _loginUserWith(email: UserDefaults.standard.string(forKey: "Email")!, password: UserDefaults.standard.string(forKey: "Password")!) : _loginUserWith(email: emailField.text!, password: passwordField.text!)
     }
-    
+  
     @IBAction func registerButton(_ sender: Any){
         guard
             let username = emailField.text,
@@ -94,7 +94,7 @@ final class LoginViewController: UIViewController {
         revealingSplashView.animationType = .twitter
         revealingSplashView.startAnimation()
     }
-    
+
     private func showProgressHud(){
         let loadingNotification = MBProgressHUD.showAdded(to: view, animated: true)
         loadingNotification.mode = MBProgressHUDMode.indeterminate
@@ -105,8 +105,7 @@ final class LoginViewController: UIViewController {
         let bundle = Bundle.main
         let storyboard = UIStoryboard(name: "Home", bundle: bundle)
         let homeViewController = storyboard.instantiateViewController(
-            withIdentifier: "HomeViewController"
-            ) as! HomeViewController
+            withIdentifier: "HomeViewController") as! HomeViewController
         
         homeViewController.loggedUser = currentLoggedUser!.token
         navigationController?.setViewControllers([homeViewController], animated: true)
