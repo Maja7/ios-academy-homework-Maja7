@@ -26,7 +26,7 @@ final class LoginViewController: UIViewController {
     private var currentLoggedUser: LoginData?
     let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "splash-logo")!, iconInitialSize: CGSize(width: 129, height: 148), backgroundColor: .white)
     
-     // MARK: - Lifecycle methods
+    // MARK: - Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ final class LoginViewController: UIViewController {
         configureUI()
     }
     
-     // MARK: - Actions
+    // MARK: - Actions
     
     @IBAction func loginButton(_ sender: Any) {
         guard
@@ -48,7 +48,7 @@ final class LoginViewController: UIViewController {
         }
         _loginUserWith(email: emailField.text!, password: passwordField.text!)
     }
-       
+
     @IBAction func registerButton(_ sender: Any){
         guard
             let username = emailField.text,
@@ -93,15 +93,18 @@ final class LoginViewController: UIViewController {
         loadingNotification.label.text = "Loading"
     }
     
+    
     private func goToHomePage(){
         let bundle = Bundle.main
         let storyboard = UIStoryboard(name: "Home", bundle: bundle)
         let homeViewController = storyboard.instantiateViewController(
             withIdentifier: "HomeViewController"
-        )
-        navigationController?.pushViewController(homeViewController, animated: true)
+            ) as! HomeViewController
+        
+        homeViewController.loggedUser = currentLoggedUser!.token
+        navigationController?.setViewControllers([homeViewController], animated: true)
     }
-    
+  
     private func showAlert(title: String,  message: String){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
@@ -112,40 +115,40 @@ final class LoginViewController: UIViewController {
     }
 }
 
-    // MARK: - Login + automatic JSON parsing
+// MARK: - Login + automatic JSON parsing
+
+private extension LoginViewController {
     
-    private extension LoginViewController {
-        
-        func _loginUserWith(email: String, password: String) {
-            showProgressHud()
-            let parameters: [String: String] = [
-                "email": email,
-                "password": password
-            ]
-            Alamofire
-                .request(
-                    "https://api.infinum.academy/api/users/sessions",
-                    method: .post,
-                    parameters: parameters,
-                    encoding: JSONEncoding.default)
-                .validate()
+    func _loginUserWith(email: String, password: String) {
+        showProgressHud()
+        let parameters: [String: String] = [
+            "email": email,
+            "password": password
+        ]
+        Alamofire
+            .request(
+                "https://api.infinum.academy/api/users/sessions",
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default)
+            .validate()
             .responseDecodableObject(keyPath: "data", decoder: JSONDecoder()) { [weak self] (response: DataResponse<LoginData>) in
                 switch response.result {
-                    case .success(let response):
-                        //print( "Success: \(response)")
-                        guard let self = self else { return }
-                        self.currentLoggedUser = response
-                        MBProgressHUD.hide(for: self.view, animated: true)
-                        self.goToHomePage()
-                    case .failure(let error):
-                        print("API failure: \(error)")
-                        self!.showAlert(title: "API Failure", message:"API failure during login: \(error)")
-                        MBProgressHUD.hide(for: self!.view, animated: true)
-                    }
-            }
+                case .success(let response):
+                    //print( "Success: \(response)")
+                    guard let self = self else { return }
+                    self.currentLoggedUser = response
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    self.goToHomePage()
+                case .failure(let error):
+                    print("API failure: \(error)")
+                    self!.showAlert(title: "API Failure", message:"API failure during login: \(error)")
+                    MBProgressHUD.hide(for: self!.view, animated: true)
+                }
         }
+    }
 }
- 
+
 // MARK: - Register + automatic JSON parsing
 
 private extension LoginViewController {
@@ -171,10 +174,10 @@ private extension LoginViewController {
                     self.currentUser = user
                     MBProgressHUD.hide(for: self.view, animated: true)
                     self._loginUserWith(email: email, password: password)
-                case .failure(let error):
+                 case .failure(let error):
                     print("API failure: \(error)")
                     self!.showAlert(title: "API Failure", message:"API failure during registration: \(error)")
-                     MBProgressHUD.hide(for: self!.view, animated: true)
+                    MBProgressHUD.hide(for: self!.view, animated: true)
                 }
         }
     }
